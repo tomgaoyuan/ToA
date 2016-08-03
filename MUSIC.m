@@ -8,15 +8,15 @@ D = 3; %source  number
 OMEGA = [ 0 45 180 ] / 180 *pi;
 LOOP = 1000;
 for c = 1: D
-  A(:,c) = exp(-j* OMEGA(c) * [0:(M-1)]).';
+  A(:,c) = exp(-1j* OMEGA(c) * [0:(M-1)]).';
 end
 SIGMA_S = 10;
 SIGMA_E = 1;
 Rx = zeros(M,M);
 for c = 1:LOOP
   rav = randn(2*D+2*M,1);
-  s = SIGMA_S * ( rav(1:D) + j * rav(D+1:2*D) ) / sqrt(2);
-  e = SIGMA_E * ( rav(2*D+1:2*D+M) + j * rav(2*D+M+1:2*D+2*M) ) / sqrt(2);
+  s = SIGMA_S * ( rav(1:D) + 1j * rav(D+1:2*D) ) / sqrt(2);
+  e = SIGMA_E * ( rav(2*D+1:2*D+M) + 1j * rav(2*D+M+1:2*D+2*M) ) / sqrt(2);
   x = A * s + e;
   Rx = Rx + x*x';
 end
@@ -56,7 +56,7 @@ G = V(:,D_E+1:end );
 omega = linspace(0,2*pi,500);
 P = zeros(1,length(omega));
 for c = 1:length(omega)
-  a = exp(-j* omega(c) * [0:(M-1)]).';
+  a = exp(-1j* omega(c) * [0:(M-1)]).';
   P(c) = 10*log10(1 / real( (a'*G*G'*a) ) );
 end
 plot(omega/2/pi*360,P);
