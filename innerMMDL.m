@@ -1,4 +1,4 @@
-function [ D bit] = innerMMDL(U, LAMBDA, X, S1)
+function [ D  bit] = innerMMDL(U, LAMBDA, X, S1)
   const_M = size(X,1);
   N = size(X,2);
   dSquare = 0;
@@ -18,6 +18,7 @@ function [ D bit] = innerMMDL(U, LAMBDA, X, S1)
       xi(k) = xi(k) - abs(rxd' * U(:,c)).^2/LAMBDA(c,c);
     end
   end
+  xi(xi <= 0) =NaN;
   theMMDL = N * log(xi) + 1/2 * ( [1:const_M].^2 + [1:const_M] ) *log(N);
   [Y I] = min(theMMDL);
   D = I;
