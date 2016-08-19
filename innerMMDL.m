@@ -21,6 +21,11 @@ function [ D  bit] = innerMMDL(U, LAMBDA, X, S1)
   xi(xi <= 0) =NaN;
   theMMDL = N * log(xi) + 1/2 * ( [1:const_M].^2 + [1:const_M] ) *log(N);
   [Y I] = min(theMMDL);
-  D = I;
-  bit = Y;
+  if ~isnan(Y) 
+    D = I;
+    bit = Y;
+  else
+    D = NaN;
+    bit = Inf;
+  end  
 end
