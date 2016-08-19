@@ -3,7 +3,7 @@ close all;
 clear all;
 %setting
 const_p = 8;   %source number
-const_M = 64;   %sensor number
+const_M = 40;   %sensor number
 global FFT_SIZE;
 global SC;
 FFT_SIZE = 64;
@@ -49,7 +49,7 @@ end
 U = V;
 %joint
 disp('joint');
-SPAN = [1:20];
+SPAN = [1:30];
 for c = SPAN
   ToAs = innerMUSIC(U, LAMBDA, c);
   if isempty(ToAs) 
