@@ -1,7 +1,8 @@
 function [ PRS, SC, OFDMnumber] = GeneratePRS(cellID, subframeID, TXnum, DLRBnum, prsRBnum )
-%Gnenerate the PRS
-%   returns PRS modulation symbols, SC index and correspondinig OFDM
-%   symbols
+%Generate the PRS according to 36.211 6.10.4
+%   return PRS modulation symbols, SC index and correspondinig OFDM
+%   symbols which is sent on p=6
+%   TXnum : antena port
 N = 110; 
 N_CP = 1;   %only normal CP supported
 N_DL_RB = DLRBnum;
@@ -20,23 +21,11 @@ N_PRS_ID = cellID;
 for ofdmIdx = OFDMpattern
     n_s = 2 *subframeID + floor(ofdmIdx/N_DL_symb);   %slot number
     l = mod(ofdmIdx,N_DL_symb);   %OFDM symbol number
+    %pseudo-random sequence
     c_init = 2^28 * floor(N_PRS_ID/512) + ...
             2^10 * (7 * (n_s+1) + l + 1) * ( 2 * (mod(N_PRS_ID,512)) +1) +...
             2 * mod(N_PRS_ID,512) + N_CP;
-    %pseudo-random sequence
-    N_c= 1600;
-    M_pn= N_c + 4 * N;
-    x1 = zeros(1,M_pn);
-    x1(1)= 1;
-    for c = 32:M_pn
-        x1(c) = mod(x1(c-28)+x1(c-31),2);
-    end
-    x2 = zeros(1,M_pn);
-    x2(1:31) = bitget(uint32(c_init),1:31);
-    for c = 32:M_pn
-       x2(c) = mod(x2(c-28)+x2(c-29)+x2(c-30)+x2(c-31),2); 
-    end
-    c = mod( x1(N_c+(1:4*N)) + x2(N_c+(1:4*N)), 2 );
+    c = GenerateRandom(4*N, c_init);
     %sequence generation
     r = 1/sqrt(2) * ( (1-2 * c(1:2:end)) + 1j * ( 1 - 2*c(2:2:end) ));
     %resource mapping
