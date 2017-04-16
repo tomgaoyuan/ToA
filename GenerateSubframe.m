@@ -1,5 +1,5 @@
 function [subframe RBs] = GenerateSubframe(SYSTEM, subframeID)
-
+%Generate a positioning subframe
 TxNum = SYSTEM.TxNum;
 DLRBnum = SYSTEM.totalRB;
 cellID = SYSTEM.cellID;
