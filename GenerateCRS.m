@@ -1,5 +1,5 @@
 function [ CRS, SC, OFDMnumber ] = GenerateCRS(cellID, subframeID, TXnum, DLRBnum )
-%Generate the CRS (cell-specific Reference ID) according to 36.211 6.10.1
+%Generate the CRS (cell-specific Reference ID) according to 36.211 R14
 N = 110;
 N_DL_RB = DLRBnum;
 N_cp = 1;       %only for normal CP
