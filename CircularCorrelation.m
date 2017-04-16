@@ -1,5 +1,5 @@
-function [ l ] = circularCorrelation( r1, r2 )
-%calculation the circular correlation
+function [ l ] = CircularCorrelation( r1, r2 )
+%calculation of the circular correlation
 %   l == r1 CC r2;
 assert(length(r1)==length(r2));
 Ka = length(r1);
