@@ -1,0 +1,1 @@
+%do some cleaningclear all;close all;%initializationParameters;%start a dropst = GenerateSubframe(SYSTEM, 0 );tmp = SplitSubframe(SYSTEM, st);sSymbol = tmp{1}{1,4};rt = PassAWGN(CHANNEL, st{1});rt = PassDelay(CHANNEL, rt);tmp = SplitSubframe(SYSTEM, {rt});rSymbol = tmp{1}{1,4};clear tmp;

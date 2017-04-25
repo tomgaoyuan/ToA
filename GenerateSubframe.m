@@ -1,4 +1,4 @@
-function [subframe RBs] = GenerateSubframe(SYSTEM, subframeID)
+function [varargout] = GenerateSubframe(SYSTEM, subframeID)
 %Generate a positioning subframe
 TxNum = SYSTEM.TxNum;
 DLRBnum = SYSTEM.totalRB;
@@ -52,4 +52,10 @@ for NT = 1: TxNum
   end   %end OFDMidx
 end   %end TxNum
 
+if nargout == 1
+  varargout{1} = subframe;
+else
+  varargout{1} = subframe;
+  varargout{2} = RBs;
+end %end if
 end   %end function 
