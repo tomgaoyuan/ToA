@@ -24,3 +24,8 @@ CHANNEL = struct();
   CHANNEL.type = 'AWGN'; 
   CHANNEL.NoisePower = 1;
   CHANNEL.TimeDelay = 10;
+  CHANNEL.Amplify = 1;
+  
+ESTIMATION = struct();
+%estimation config
+  ESTIMATION.TimeSearchWindow = [1: 100];
