@@ -28,4 +28,4 @@ CHANNEL = struct();
   
 ESTIMATION = struct();
 %estimation config
-  ESTIMATION.TimeSearchWindow = [1: 100];
+  ESTIMATION.TimeSearchWindow = [0 : 100];  %unit: sample
