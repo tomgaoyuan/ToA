@@ -1,12 +1,11 @@
 SYSTEM = struct();...
 %system config 
   %Bandwidth 10MHz ~ 50RB
-  SYSTEM.DW = 10e6; 
+  SYSTEM.BW = 10e6; 
   %cell config
   SYSTEM.cellID = 0; 
   %physical antenna config
-  SYSTEM.TxNum = 1; 
-  SYSTEM.RxNum = 2; 
+  SYSTEM.TxNum = 1;  %Ports used for CRS 1:4 for ap 0:3
   %subframe config
   SYSTEM.totalRB = 50; 
   SYSTEM.totalOFDM = 14; 
@@ -22,10 +21,17 @@ SYSTEM = struct();...
 CHANNEL = struct();
 %channel config
   CHANNEL.type = 'AWGN'; 
-  CHANNEL.NoisePower = 1;
-  CHANNEL.TimeDelay = 10;
-  CHANNEL.Amplify = 1;
+  CHANNEL.noisePower = 1;
+  CHANNEL.timeDelay = 10;
+  CHANNEL.amplify = 1;
   
 ESTIMATION = struct();
 %estimation config
-  ESTIMATION.TimeSearchWindow = [0 : 100];  %unit: sample
+  ESTIMATION.timeSearchWindow = [0 : 100];  %unit: sample
+  
+SIMULATION = struct();
+% simulation config
+  SIMULATION.NSubframes = 4;
+  SIMULATION.withCP = false;
+  SIMULATION.wichOFDMSymbol = [3];
+  SIMULATION.whichAPUsed = [1];

@@ -6,7 +6,7 @@ function [retval] = TC_AWGN_1Sample (SYSTEM, ESTIMATION, st, rt)
 r = CircularCorrelation(rt, st);
 R = abs(r).^2;
 tau = [0 : length(R)-1];
-tauInterp = ESTIMATION.TimeSearchWindow;
+tauInterp = ESTIMATION.timeSearchWindow;
 assert(max(tauInterp) <= max(tau));
 Rinterp = interp1( tau, R, tauInterp);
 % plot(tauInterp, Rinterp);

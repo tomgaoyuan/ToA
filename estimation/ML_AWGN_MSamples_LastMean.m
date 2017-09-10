@@ -7,6 +7,7 @@ tmp = zeros(1, size(sSym,2));
 for c = 1: size(sSym,2)
   tmp(c) = ML_AWGN_1Sample (SYSTEM, ESTIMATION, sSym(:, c), rSym(:, c), SC(:, c));
 end
+tmp
 retval = mean(tmp);
 
 end

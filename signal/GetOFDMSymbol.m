@@ -1,7 +1,7 @@
 function [ varargout] = GetOFDMSymbol( SYSTEM, subframe, index, AP, hasCP )
 % return the OFDM symmbol / RBs asked
 %   index = 0,1,2 
-%   AP is the index of physical antenna 1, 2, ...
+%   AP is the index of CRS  ap  1 for 0, 2 for 1, ...
 
 tmp = SplitSubframe(SYSTEM, subframe);
 if ~hasCP
