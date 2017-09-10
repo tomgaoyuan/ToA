@@ -9,6 +9,7 @@ if ~hasCP
 else
     symbol = [tmp{AP}{2,index+1} tmp{AP}{1,index+1}];
 end
+symbol = symbol.';
 
 tmp = ResolveSubframe(SYSTEM, subframe);
 RBs = tmp{AP}(:, index+1);

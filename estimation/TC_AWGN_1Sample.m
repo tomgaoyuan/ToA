@@ -1,7 +1,8 @@
-function [retval] = TC_AWGN (SYSTEM, ESTIMATION, st, rt)
+function [retval] = TC_AWGN_1Sample (SYSTEM, ESTIMATION, st, rt)
 % Estimation ToA using correlation peak
 % r(t) = \alpha s(t-\tau) + w(t)
 % where \alpha is a constant but known
+
 r = CircularCorrelation(rt, st);
 R = abs(r).^2;
 tau = [0 : length(R)-1];
@@ -12,4 +13,5 @@ Rinterp = interp1( tau, R, tauInterp);
 
 [ x ix ] =max( Rinterp );
 retval = tauInterp(ix);
-end
+
+endfunction

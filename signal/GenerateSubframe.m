@@ -34,7 +34,7 @@ subframe{NT} = zeros(1,chipNum);
 freq = zeros(FFTsize, OFDMnum);
 % RBs(subcarrierNum/2+1) is the DC subcarrier
 freq( mod(-subcarrierNum/2 -1 + [1:subcarrierNum], FFTsize) + 1, :)  = RBs{NT};
-time = ifft(freq);
+time = sqrt(FFTsize) * ifft(freq);
 top = 0;
 for OFDMidx = 0: OFDMnum -1
   tmp = time(:, OFDMidx+1);

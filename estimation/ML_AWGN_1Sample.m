@@ -1,6 +1,7 @@
-function [retval] = ML_AWGN (SYSTEM, ESTIMATION, sSym, rSym, SC)
+function [retval] = ML_AWGN_1Sample (SYSTEM, ESTIMATION, sSym, rSym, SC)
 % r(t) = \alpha s(t-\tau) + w(t)
 % where \alpha is a constant but known
+
 N = SYSTEM.FFTsize;
 ref = rSym .* sSym.'' ./ abs(sSym).^2;
 R = ones(size(sSym));
@@ -13,4 +14,5 @@ end
 % plot(TAU, Q);
 [x, ix] = max( Q );
 retval = TAU(ix);
+
 end
