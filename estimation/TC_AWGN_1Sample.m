@@ -14,4 +14,4 @@ Rinterp = interp1( tau, R, tauInterp);
 [ x ix ] =max( Rinterp );
 retval = tauInterp(ix);
 
-endfunction
+end
