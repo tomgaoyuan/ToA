@@ -5,7 +5,7 @@ SYSTEM = struct();...
   %cell config
   SYSTEM.cellID = 0; 
   %physical antenna config
-  SYSTEM.TxNum = 1;  %Ports used for CRS 1:4 for ap 0:3
+  SYSTEM.TxNum = 2;  %Ports used for CRS 1:4 for ap 0:3
   %subframe config
   SYSTEM.totalRB = 50; 
   SYSTEM.totalOFDM = 14; 
@@ -28,6 +28,7 @@ CHANNEL = struct();
 ESTIMATION = struct();
 %estimation config
   ESTIMATION.timeSearchWindow = [0 : 100];  %unit: sample
+  ESTIMATION.pathSearchRange = [1: 15];
   
 SIMULATION = struct();
 % simulation config
