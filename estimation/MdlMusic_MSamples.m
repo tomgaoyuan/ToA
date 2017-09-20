@@ -8,8 +8,8 @@ uniqueSC = unique(SC.', 'rows').';
 patternSize = size(uniqueSC, 2);
 for c = 1: patternSize  %same SC within a loop
   SCGroup{c} = uniqueSC(:, c);
-  sSCGroup = sSC( :, sum(SC == uniqueSC(c),1) != 0 );
-  rSCGroup = rSC( :, sum(SC == uniqueSC(c),1) != 0 );
+  sSCGroup = sSC( :, sum(SC == uniqueSC(c),1) ~= 0 );
+  rSCGroup = rSC( :, sum(SC == uniqueSC(c),1) ~= 0 );
   rUni{c} = rSCGroup ./ sSCGroup;
 end   %end for patternSize
 
@@ -26,16 +26,20 @@ for c = 1: patternSize
   R_N = R_N / NSamples;
   %docomposition
   [U, LAMBDA] = EigenSort(R_N);
-  [DL, DLIdx] = Inner_MDL(LAMBDA, NSamples);
   %estimate path number 
+  [DL, DLIdx] = Inner_MDL(LAMBDA, NSamples);
   range = ESTIMATION.pathSearchRange;
-  [v k] = min( DL( DLIdx == range ) );
+  [v, k] = min( DL( DLIdx == range ) );
   if isnan(v) 
     DPerSCPattern(c) = -1;
     ToAPerSCPattern(c) = NaN;
     continue;
   end
   DPerSCPattern(c) = DLIdx(k);
+  %estimate ToA
+  FFTsize = SYSTEM.FFTsize;
+  phiIndex = -1i * (SCGroup{c}-1) / FFTsize * 2 * pi;
+  [P, tau] = Inner_MUSIC (U, DPerSCPattern(c), phiIndex);
   
   
   
