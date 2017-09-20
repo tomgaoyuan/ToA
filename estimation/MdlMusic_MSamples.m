@@ -6,6 +6,8 @@ function [retval] = MdlMusic_MSamples(SYSTEM, ESTIMATION, sSC, rSC, SC)
 %extract SC pattern
 uniqueSC = unique(SC.', 'rows').';
 patternSize = size(uniqueSC, 2);
+SCGroup = cell(1, patternSize);
+rUni = cell(1, patternSize);
 for c = 1: patternSize  %same SC within a loop
   SCGroup{c} = uniqueSC(:, c);
   sSCGroup = sSC( :, sum(SC == uniqueSC(c),1) ~= 0 );
@@ -39,9 +41,12 @@ for c = 1: patternSize
   %estimate ToA
   FFTsize = SYSTEM.FFTsize;
   phiIndex = -1i * (SCGroup{c}-1) / FFTsize * 2 * pi;
-  [P, tau] = Inner_MUSIC (U, DPerSCPattern(c), phiIndex);
-  
-  
+  tau = linspace(0, FFTSize, FFTSize * 10);
+  P = Inner_MUSIC (U, DPerSCPattern(c), phiIndex);
+  window = ESTIMATION.timeSearchWindow;
+  tauTruncate = tau(tau >= window(1) & tau <= window(end));
+  PTruncate = P(tau >= window(1) & tau <= window(end));
+  [y, x ] = FindMaximas(PTruncate, tauTruncate);
   
   
 end   %end for patternSize

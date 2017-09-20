@@ -1,4 +1,4 @@
-function [P, tau] = Inner_MUSIC (U, D, phiIndex)
+function [P] = Inner_MUSIC (U, D, phiIndex, tau)
 %Perform MUSIC algorithm without search window
 %   U : eigen vectors
 %   D : Number of paths 
@@ -6,7 +6,6 @@ function [P, tau] = Inner_MUSIC (U, D, phiIndex)
 
 %obtain noise space G
 G = U(:, D+1:end );
-tau = linspace(0, 2*pi, 500);
 P = zeros(1, length(tau));
 %get MUSIC function P
 for c = 1:length(tau)
