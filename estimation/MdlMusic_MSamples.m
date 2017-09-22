@@ -20,7 +20,7 @@ DPerSCPattern = zeros(1, patternSize);
 ToAPerSCPattern = zeros(1, patternSize);
 for c = 1: patternSize
   %get correlation matrix
-  NSamples = size(rUni{c}, 3);
+  NSamples = size(rUni{c}, 2);
   R_N  = zeros( length( SCGroup{c} ) );
   for c1 = 1: NSamples
     R_N = rUni{c}(:, c1) * rUni{c}(:, c1)';
@@ -31,23 +31,25 @@ for c = 1: patternSize
   %estimate path number 
   [DL, DLIdx] = Inner_MDL(LAMBDA, NSamples);
   range = ESTIMATION.pathSearchRange;
-  [v, k] = min( DL( DLIdx == range ) );
+  DLIdxMask = DLIdx >= range(1)  &  DLIdx <= range(end);
+  [v, k] = min( DL(DLIdxMask));
   if isnan(v) 
     DPerSCPattern(c) = -1;  %estimation failuare
     ToAPerSCPattern(c) = -1; 
     continue;
   end
-  DPerSCPattern(c) = DLIdx(k);
+  DLIdxMaskIdx = find(DLIdxMask==1);
+  DPerSCPattern(c) = DLIdx( DLIdxMaskIdx(k));
   %estimate ToA
   FFTsize = SYSTEM.FFTsize;
   phiIndex = -1i * (SCGroup{c}-1) / FFTsize * 2 * pi;
-  tau = linspace(0, FFTSize, FFTSize * 10);
-  P = Inner_MUSIC (U, DPerSCPattern(c), phiIndex);
+  tau = linspace(0, FFTsize, FFTsize * 10);
+  P = Inner_MUSIC (U, DPerSCPattern(c), phiIndex, tau);
   window = ESTIMATION.timeSearchWindow;
   tauTruncate = tau(tau >= window(1) & tau <= window(end));
   PTruncate = P(tau >= window(1) & tau <= window(end));
   %find all maximaxs in the search window
-  [y, x ] = FindMaximas(PTruncate, tauTruncate);
+  [~, x ] = FindMaximas(PTruncate, tauTruncate);
   if ~isempty(x)
     x = x(1: min([DPerSCPattern(c) length(x)]));
     ToAs = sort(x);

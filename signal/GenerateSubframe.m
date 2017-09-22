@@ -20,7 +20,7 @@ symbols = cell(1, TxNum);
 
 for NT = 1 : TxNum
   symbols = {CRS{NT}, PRS{1}};
-  SCs = {CRSSC{NT}, PRSSC{1}};
+  SCs = {CRSSC{NT}, PRSSC{1}}; %mapping PRS ap (ap6) to CRS aps (ap0,1,2,3)
   OFDMs = {CRSOFDMnumber{NT}, PRSOFDMnumber{1}};
   %mapping to resource block
 

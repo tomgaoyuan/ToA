@@ -21,7 +21,7 @@ SYSTEM = struct();...
 CHANNEL = struct();
 %channel config
   CHANNEL.type = 'AWGN'; 
-  CHANNEL.noisePower = 1;
+  CHANNEL.noisePower = 0;
   CHANNEL.timeDelay = 10;
   CHANNEL.amplify = 1;
   

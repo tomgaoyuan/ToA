@@ -20,7 +20,7 @@ for NT = 1: TxNum
         top = top + CPs(cpFlag);
         time = subframe{NT}(top+[1:FFTsize]);
         top = top + FFTsize;
-        freq = fft(time);
+        freq = fft(time) /sqrt(FFTsize);
         RBs{NT}(:, OFDMidx+1) = freq( mod(-subcarrierNum/2 -1 + [1:subcarrierNum], FFTsize) + 1);
     end     %end OFDMidx
 end     %end NT
