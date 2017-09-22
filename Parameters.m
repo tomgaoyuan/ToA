@@ -31,7 +31,8 @@ ESTIMATION = struct();
   ESTIMATION.pathSearchRange = [1: 15];
   
 SIMULATION = struct();
-% simulation config
+%simulation config
+  SIMULATION.NDrops = 1;
   SIMULATION.NSubframes = 4;
   SIMULATION.withCP = false;
   SIMULATION.wichOFDMSymbol = [3];

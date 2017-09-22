@@ -1,4 +1,4 @@
-function [retval] = MdlMusic_MSamples(SYSTEM, ESTIMATION, sSC, rSC, SC)
+function [ToA] = MdlMusic_MSamples(SYSTEM, ESTIMATION, sSC, rSC, SC)
 % Tackle with multiple samples
 % IN:
 %   sSC <N x sample number>
@@ -33,8 +33,8 @@ for c = 1: patternSize
   range = ESTIMATION.pathSearchRange;
   [v, k] = min( DL( DLIdx == range ) );
   if isnan(v) 
-    DPerSCPattern(c) = -1;
-    ToAPerSCPattern(c) = NaN;
+    DPerSCPattern(c) = -1;  %estimation failuare
+    ToAPerSCPattern(c) = -1; 
     continue;
   end
   DPerSCPattern(c) = DLIdx(k);
@@ -46,9 +46,21 @@ for c = 1: patternSize
   window = ESTIMATION.timeSearchWindow;
   tauTruncate = tau(tau >= window(1) & tau <= window(end));
   PTruncate = P(tau >= window(1) & tau <= window(end));
+  %find all maximaxs in the search window
   [y, x ] = FindMaximas(PTruncate, tauTruncate);
-  
-  
+  if ~isempty(x)
+    x = x(1: min([DPerSCPattern(c) length(x)]));
+    ToAs = sort(x);
+  else 
+    ToAs = [];
+  end   %end if
+  if ~isempty(ToAs) 
+    ToAPerSCPattern(c) = ToAs(1);
+  else
+    ToAPerSCPattern(c) = -1;    %estimation failure
+  end %end if
 end   %end for patternSize
-retval = 0;
+
+ToA = mean(ToAPerSCPattern);
+
 end
