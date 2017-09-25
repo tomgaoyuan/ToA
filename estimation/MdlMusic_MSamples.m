@@ -1,4 +1,4 @@
-function [ToA] = MdlMusic_MSamples(SYSTEM, ESTIMATION, sSC, rSC, SC)
+function [ToA, D] = MdlMusic_MSamples(SYSTEM, ESTIMATION, sSC, rSC, SC)
 % Tackle with multiple samples
 % IN:
 %   sSC <N x sample number>
@@ -64,5 +64,5 @@ for c = 1: patternSize
 end   %end for patternSize
 
 ToA = mean(ToAPerSCPattern);
-
+D = mode(DPerSCPattern);
 end
