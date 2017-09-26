@@ -1,4 +1,4 @@
-function [DL DLIdx] = Inner_MDL (LAMBDA, NSamples)
+function [DL, DLIdx] = Inner_MDL (LAMBDA, NSamples)
 %Perform the MDL algorithm  without any search window
 %  LAMBDA is in descending order > 
 %  NSamples is the number of samples

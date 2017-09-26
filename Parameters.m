@@ -21,14 +21,14 @@ SYSTEM = struct();...
 CHANNEL = struct();
 %channel config
   CHANNEL.type = 'AWGN'; 
-  CHANNEL.noisePower = 0;
+  CHANNEL.noisePower = 1;
   CHANNEL.timeDelay = 10;
   CHANNEL.amplify = 1;
   
 ESTIMATION = struct();
 %estimation config
-  ESTIMATION.timeSearchWindow = [0 : 100];  %unit: sample
-  ESTIMATION.pathSearchRange = [1: 15];
+  ESTIMATION.timeSearchWindow = [0 : 0.5 :100];  %unit: sample
+  ESTIMATION.pathSearchRange = [1: 15]; %unit: count
   
 SIMULATION = struct();
 %simulation config

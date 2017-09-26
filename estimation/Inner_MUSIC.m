@@ -10,7 +10,7 @@ P = zeros(1, length(tau));
 %get MUSIC function P
 for c = 1:length(tau)
     phi = exp(phiIndex * tau(c));
-    P(c) = 1 / real( phi' * (G*G') * phi);
+    P(c) = 1 / abs( phi' * (G*G') * phi); %abs() is required for calculating error
 end % end for c
 
 end

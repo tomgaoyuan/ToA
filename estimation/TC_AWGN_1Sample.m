@@ -11,7 +11,7 @@ assert(max(tauInterp) <= max(tau));
 Rinterp = interp1( tau, R, tauInterp);
 % plot(tauInterp, Rinterp);
 
-[ x ix ] =max( Rinterp );
+[ x, ix ] =max( Rinterp );
 retval = tauInterp(ix);
 
 end
