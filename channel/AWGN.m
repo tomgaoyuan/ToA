@@ -1,6 +1,6 @@
 function [ Rx ] = AWGN(SYSTEM, CHANNEL, Tx)
 %AWGN channel
-%   No inter-port interference
+%   No inter-port interference, multi-layer transmission
 %   Every ap has different noise
 
 TxNum = SYSTEM.TxNum;

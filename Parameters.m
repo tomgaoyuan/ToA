@@ -20,7 +20,7 @@ SYSTEM = struct();...
 
 CHANNEL = struct();
 %channel config
-  CHANNEL.type = 'AWGN'; 
+  CHANNEL.type = 'ETU'; 
   
 ESTIMATION = struct();
 %estimation config
@@ -46,7 +46,15 @@ switch CHANNEL.type
     CHANNEL.pathPower = 1;
     CHANNEL.timeDelay = 10;
     CHANNEL.noisePower = 1;
-    
+  
+  case 'ETU'
+    CHANNEL.timeDelay = 10;
+    CHANNEL.excessDelay = [0 1 2 3 4 8 25 35 77];  %unit: chip
+    CHANNEL.pathPowerdB = [-1 -1 -1 0 0 0 -3 -5 -7]; 
+    CHANNEL.pathPower = 10.^(CHANNEL.pathPowerdB/10) / ...
+                        sum(10.^(CHANNEL.pathPowerdB/10) );  %unit: linear
+    CHANNEL.noisePower = 1;
+ 
   otherwise 
     error('Unexpected channel');
   
