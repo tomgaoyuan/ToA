@@ -1,10 +1,9 @@
-function [out] = PassAWGN ( CHANNEL, in)
+function [out] = PassAWGN ( a, sigma2, in)
 % An AWGN channel function 
 
-sigma2 = CHANNEL.noisePower;
 % add complex noise
   [ m, n ] = size(in);
-  noise = sigma2/sqrt(2) * randn(m, n) + 1j * sigma2/sqrt(2) * randn(m, n);
-  out = CHANNEL.amplify * in + noise;
+  noise = sqrt(sigma2 / 2) * randn(m, n) + 1j * sqrt(sigma2 / 2) * randn(m, n);
+  out = a * in + noise;
 
 end

@@ -21,9 +21,6 @@ SYSTEM = struct();...
 CHANNEL = struct();
 %channel config
   CHANNEL.type = 'AWGN'; 
-  CHANNEL.noisePower = 1;
-  CHANNEL.timeDelay = 10;
-  CHANNEL.amplify = 1;
   
 ESTIMATION = struct();
 %estimation config
@@ -37,3 +34,20 @@ SIMULATION = struct();
   SIMULATION.withCP = false;
   SIMULATION.wichOFDMSymbol = [3];
   SIMULATION.whichAPUsed = [1];
+  
+switch CHANNEL.type 
+
+  case 'AWGN' 
+    CHANNEL.noisePower = 1;
+    CHANNEL.timeDelay = 10;
+    CHANNEL.amplify = 1;
+  
+  case 'Rayleigh'
+    CHANNEL.pathPower = 1;
+    CHANNEL.timeDelay = 10;
+    CHANNEL.noisePower = 1;
+    
+  otherwise 
+    error('Unexpected channel');
+  
+end  %end switch   
