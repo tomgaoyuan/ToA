@@ -15,9 +15,10 @@ for NT = 1 : TxNum
   a = sqrt(pathPower/2) .* ([1 1i] * randn(2, pathNumber) );
   Rx{NT} = zeros(size(st));
   for d = 1: pathNumber
-    rt = PassAWGN(a(d), sigma2, st);
+    rt = PassAWGN(a(d), 0, st);
     rt = PassDelay(delay + exDelay(d), rt);
     Rx{NT} = Rx{NT} + rt;
   end  %end for path
+  Rx{NT} =  PassAWGN(1, sigma2, Rx{NT});
 end %end TxNum 
 end

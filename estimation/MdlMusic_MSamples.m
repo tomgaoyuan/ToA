@@ -27,7 +27,8 @@ for c = 1: patternSize
   NSamples = size(rUni{c}, 2);
   R_N  = zeros( length( SCGroup{c} ) );
   for c1 = 1: NSamples
-    R_N = rUni{c}(:, c1) * rUni{c}(:, c1)';
+    %ML estimation of correlation mat
+    R_N = R_N + rUni{c}(:, c1) * rUni{c}(:, c1)'; 
   end   %end for sample number Nsample
   R_N = R_N / NSamples;
   %docomposition

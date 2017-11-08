@@ -27,13 +27,15 @@ for c = 1: patternSize
   NSamples = size(rUni{c}, 2);
   R_N  = zeros( length( SCGroup{c} ) );
   for c1 = 1: NSamples
-    R_N = rUni{c}(:, c1) * rUni{c}(:, c1)';
+    %ML estimation of correlation mat
+    R_N = R_N + rUni{c}(:, c1) * rUni{c}(:, c1)'; 
   end   %end for sample number Nsample
   R_N = R_N / NSamples;
   %docomposition
   [U, LAMBDA] = EigenSort(R_N);
   %%%%% estimation begin %%%%%
   Dw = zeros(1, length(range) );
+  Lw = zeros(1, length(range) );
   ToAw = zeros(1, length(range) );
   for d = range
     %estimate ToA
@@ -63,16 +65,18 @@ for c = 1: patternSize
     a1 = Inner_LS( rUni{c}, ToAs, phiIndex );
     %MMDL path number estimation
     [DL, DLIdx] = Inner_MMDL(U, LAMBDA, rUni{c}, a1);
-    DLIdxMask = DLIdx >= range(1)  &  DLIdx <= range(end);  
-    [Dw(d), ~] = min( DL(DLIdxMask));    
+    DLIdxMask = DLIdx >= range(1)  &  DLIdx <= range(end); 
+    DLIdxMaskIdx = find(DLIdxMask==1);
+    [Dw(d), k] = min( DL(DLIdxMask)); 
+    Lw(d) = DLIdx( DLIdxMaskIdx(k));
   end % end for range
   [v, k ] = min(Dw);
   if isnan(v) || isinf(v) 
     DPerSCPattern(c) = -1;
     ToAPerSCPattern(c) = -1;
   else
-    DPerSCPattern(c) = k;
-    ToAPerSCPattern(c) = ToAw(k);
+    DPerSCPattern(c) = Lw(k);
+    ToAPerSCPattern(c) = ToAw(Lw(k));
   end   %end if
   %%%%% esitmation end %%%%%
 end %end for patternSize

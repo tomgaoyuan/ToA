@@ -7,7 +7,7 @@ phiOftau = zeros(size(R,1), D);
 for c = 1: D
     phiOftau(:, c) = exp(phiIndex * ToAs(c));
 end %end for
-Tmp = inv(phiOftau'* phiOftau) * phiOftau';
+Tmp = (phiOftau'* phiOftau) \ phiOftau';
 a1 = zeros(N, 1);
 for c = 1: N
    a1(c) = Tmp(1, :) * R(:, c); 

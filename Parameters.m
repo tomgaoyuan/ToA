@@ -11,8 +11,8 @@ SYSTEM = struct();...
   SYSTEM.totalOFDM = 14; 
   SYSTEM.SCsPerRB = 12; 
   SYSTEM.FFTsize =  1024; 
-  SYSTEM.CP1 = 80; ...
-  SYSTEM.CP2 = 72; ...
+  SYSTEM.CP1 = 80; 
+  SYSTEM.CP2 = 72; 
   %PBCH config 
   SYSTEM.PBCHports = 1; 
   %PRS config
@@ -24,13 +24,13 @@ CHANNEL = struct();
   
 ESTIMATION = struct();
 %estimation config
-  ESTIMATION.timeSearchWindow = [0 : 0.5 :100];  %unit: sample
+  ESTIMATION.timeSearchWindow = [0 : 0.5 : SYSTEM.CP2];  %unit: sample
   ESTIMATION.pathSearchRange = [1: 15]; %unit: count
   
 SIMULATION = struct();
 %simulation config
-  SIMULATION.NDrops = 1;
-  SIMULATION.NSubframes = 4;
+  SIMULATION.NDrops = 10;
+  SIMULATION.NSubframes = 30;
   SIMULATION.withCP = false;
   SIMULATION.wichOFDMSymbol = [3];
   SIMULATION.whichAPUsed = [1];
@@ -53,7 +53,7 @@ switch CHANNEL.type
     CHANNEL.pathPowerdB = [-1 -1 -1 0 0 0 -3 -5 -7]; 
     CHANNEL.pathPower = 10.^(CHANNEL.pathPowerdB/10) / ...
                         sum(10.^(CHANNEL.pathPowerdB/10) );  %unit: linear
-    CHANNEL.noisePower = 1;
+    CHANNEL.noisePower = 0.1;
  
   otherwise 
     error('Unexpected channel');
