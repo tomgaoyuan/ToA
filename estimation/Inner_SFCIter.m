@@ -22,7 +22,7 @@ for c = 1: length(window)
 end
 %estimation 
 %debug 
-plot(window, abs(z).^2);
+%plot(window, abs(z).^2);
 [~, K] = max(abs(z).^2);
 newTau = window(K);
 newAlpha = z(K) / length(X);

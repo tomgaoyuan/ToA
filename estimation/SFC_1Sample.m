@@ -31,8 +31,8 @@ for c = 1: length(range)
         break;
     end %end if
 end   %end for range
-D = range(c);
-retval = min(Tau);
+%D = range(c);
+retval = min(Tau(1:c));
 
 end   %end function 
 
