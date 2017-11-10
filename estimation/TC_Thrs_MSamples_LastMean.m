@@ -1,4 +1,4 @@
-function [retval] = TC_AWGN_MSamples_LastMean (SYSTEM, ESTIMATION, st, rt)
+function [retval] = TC_Thrs_MSamples_LastMean (SYSTEM, ESTIMATION, st, rt)
 % Tackle with multiple samples
 % IN:
 %   st <N x sample number> 1 symbol in time domain
