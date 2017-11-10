@@ -22,11 +22,6 @@ CHANNEL = struct();
 %channel config
   CHANNEL.type = 'ETU'; 
   
-ESTIMATION = struct();
-%estimation config
-  ESTIMATION.timeSearchWindow = [0 : 0.5 : SYSTEM.CP2];  %unit: sample
-  ESTIMATION.pathSearchRange = [1: 15]; %unit: count
-  
 SIMULATION = struct();
 %simulation config
   SIMULATION.NDrops = 10;
@@ -59,3 +54,9 @@ switch CHANNEL.type
     error('Unexpected channel');
   
 end  %end switch   
+
+ESTIMATION = struct();
+%estimation config
+  ESTIMATION.timeSearchWindow = [0 : 0.5 : SYSTEM.CP2];  %unit: sample
+  ESTIMATION.pathSearchRange = [1: 15]; %unit: count
+  ESTIMATION.noiseThreshold = 2 * CHANNEL.noisePower;  %threshold for SS algorithm
