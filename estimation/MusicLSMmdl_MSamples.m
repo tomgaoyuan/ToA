@@ -1,7 +1,7 @@
 function [ToA, D] = MusicLSMmdl_MSamples(SYSTEM, ESTIMATION, sSC, rSC, SC)
 % Tackle with multiple samples
 % IN:
-%   sSC <N x sample number>
+%   sSC <N_PRS x sample number>
 
 %extract parameters
 FFTsize = SYSTEM.FFTsize;
