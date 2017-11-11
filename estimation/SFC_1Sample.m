@@ -11,7 +11,7 @@ function [ retval ] = SFC_1Sample( SYSTEM, ESTIMATION, sSym, rSym, SC )
 FFTsize = SYSTEM.FFTsize;
 range = ESTIMATION.pathSearchRange;
 window = ESTIMATION.timeSearchWindow;
-freqNoiseThr = ESTIMATION.noiseThreshold;
+freqNoiseThr = ESTIMATION.SFC.noiseThreshold;
 
 %variable preperation
 H =  rSym .* sSym.'' ./ abs(sSym).^2;

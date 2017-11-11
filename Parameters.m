@@ -59,4 +59,7 @@ ESTIMATION = struct();
 %estimation config
   ESTIMATION.timeSearchWindow = [0 : 0.5 : SYSTEM.CP2];  %unit: sample
   ESTIMATION.pathSearchRange = [1: 15]; %unit: count
-  ESTIMATION.noiseThreshold = 2 * CHANNEL.noisePower;  %threshold for SS algorithm
+  ESTIMATION.SFC.noiseThreshold = 2 * CHANNEL.noisePower;  %threshold for SFC algorithm
+  ESTIMATION.TCThr.alpha = 1;    %thresholds for TC-threhold algorithm
+  ESTIMATION.TCThr.beta = 0.5; 
+  ESTIMATION.TCThr.noiseThreshold = CHANNEL.noisePower; 
