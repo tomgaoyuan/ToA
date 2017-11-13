@@ -81,6 +81,6 @@ for c = 1: patternSize
   %%%%% esitmation end %%%%%
 end %end for patternSize
 
-ToA = mean(ToAPerSCPattern);
+ToA = mean(ToAPerSCPattern(ToAPerSCPattern>0));
 D = mode(DPerSCPattern);
 end

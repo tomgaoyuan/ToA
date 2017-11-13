@@ -63,3 +63,5 @@ ESTIMATION = struct();
   ESTIMATION.TCThr.alpha = 1;    %thresholds for TC-threhold algorithm
   ESTIMATION.TCThr.beta = 0.5; 
   ESTIMATION.TCThr.noiseThreshold = CHANNEL.noisePower; 
+  ESTIMATION.SDFC.lowerThreshold = 0;
+  ESTIMATION.SDFC.upperThreshold = 0.9; 

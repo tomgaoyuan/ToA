@@ -1,7 +1,6 @@
 %a sub-process for calculating CRLB
 %do some cleaning
 clear all;
-close all;
 %add packages
 addpath('./signal');
 

@@ -69,6 +69,6 @@ for c = 1: patternSize
   %%%%% estimation end %%%%%
 end   %end for patternSize
 %last mean
-ToA = mean(ToAPerSCPattern);
+ToA = mean(ToAPerSCPattern(ToAPerSCPattern>0));
 D = mode(DPerSCPattern);
 end
