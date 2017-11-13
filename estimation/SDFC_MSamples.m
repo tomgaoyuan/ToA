@@ -74,5 +74,7 @@ for c = 1: patternSize
 end   %end for patternSize
 %last mean
 ToA = mean(ToAPerSCPattern(ToAPerSCPattern>0));
-
+if isnan(ToA) 
+    ToA = -1;
+end 
 end  %end function 
