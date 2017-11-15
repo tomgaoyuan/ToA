@@ -15,6 +15,7 @@ ipers = zeros(length(files), Nmethods, length(percents) );
 ivalid = zeros(length(files), Nmethods);
 imean = zeros(length(files), Nmethods);
 ivar = zeros(length(files), Nmethods);
+ite = zeros(1, Nmethods);
 Mmethods = 2;
 bins = 1:10;
 icounts = zeros(length(files), Mmethods, length(bins));
@@ -26,6 +27,7 @@ for c = 1: length(files)
     %const parameters
     NDrops = SIMULATION.NDrops;
     timeDelay = CHANNEL.timeDelay;
+    ite = ite + TE;
     eval(['obs(' num2str(c) ')=' observation ';']);
     for c1 = 1: Nmethods 
         toa = ToA(c1, :);
@@ -44,7 +46,8 @@ for c = 1: length(files)
         end  %end for c2
     end  %end for c1
 end  %end for
+ite = ite / length(files);
 
 save('plot.mat','observation', 'obs', 'ToAVar', 'DVar', ...
-    'percents', 'ipers', 'ivalid', 'ivalid','imean', 'ivar', ...
+    'percents', 'ipers', 'ivalid', 'ivalid','imean', 'ivar', 'ite', ...
     'bins', 'icounts');
