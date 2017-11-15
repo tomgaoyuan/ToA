@@ -1,1 +1,1 @@
-%calculating E_s/I_otclear all;%initializationParameters;disp(SIMULATION);%constant calculationnoisePower = CHANNEL.noisePower;rsPower = 1;%calculatingEsIot = rsPower / noisePower ;EsIotdB = 10 * log10(EsIot);
+function [EsIot, EsIotdB] = EsRIotCalculator(noisePower)%calculating E_s/I_ot%constant calculationrsPower = 1;%calculatingEsIot = rsPower / noisePower ;EsIotdB = 10 * log10(EsIot);end 
